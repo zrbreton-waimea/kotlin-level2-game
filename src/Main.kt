@@ -1,5 +1,6 @@
 import java.lang.Thread.sleep
 val boardCell = mutableListOf<String>()
+val players = mutableListOf<String>()
 /**
  * =====================================================================
  * Programming Project for NCEA Level 2, Standard 91896
@@ -27,16 +28,22 @@ fun main() {
 
 
     while (true) {
-        val action = userStart()
+        val action: Char = readln().first().uppercaseChar()
         when (action) {
-            'C' -> boxDrawBlank()
+            'C' -> {
+                boxDrawBlank()
+                userNameSelect()
+                gameStart()
+            }
+
             'E' -> {
                 println("Goodbye!")
                 break
             }
-            else -> {
+
+            if (userStart() != null) -> {
                 println("Please select a valid input!")
-                return userOptions()
+                userOptions()
             }
         }
     }
@@ -47,10 +54,33 @@ fun userOptions(){
     println("[C]ontinue")
 }
 
+fun userNameSelect(){
+    println("Enter your name (Player1): ")
+    var userName1 = readln()
+    players.add(userName1)
+
+    println("Enter your name (Player2): ")
+    var userName2 = readln()
+    players.add(userName2)
+
+}
+
+fun gameStart(){
+    //Randomising who starts:
+    players.shuffle()
+    print("${players.first()} is starting.")
+
+
+}
+
 fun boxDrawBlank(){
-    println("╔════════╗".repeat(15))
-    println("║        ║".repeat(15))
-    println("╚════════╝".repeat(15))
+    println("╔════════╗".repeat(16))
+    println("║   ⬛  ║".repeat(16))
+    println("╚════════╝".repeat(16))
+
+    println("╔════════╗".repeat(16))
+    println("║   ⬜  ║".repeat(16))
+    println("╚════════╝".repeat(16))
 }
 
 
