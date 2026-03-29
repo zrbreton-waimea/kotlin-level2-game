@@ -27,14 +27,13 @@ fun main() {
     val choice = userOptions()
     when (choice) {
         'C' -> {
-//                boxDrawBlank()
+//            boxDrawBlank()
             userNameSelect()
             gameStart()
         }
 
         'E' -> {
             println("Goodbye!")
-            break
         }
     }
 }
@@ -50,7 +49,10 @@ fun userOptions(): Char {
         print("Choice: ")
         choice = readlnOrNull()?.trim()?.firstOrNull()?.uppercaseChar()
         if (choice != null && choice in "EC") break
-        println("INVALID\n")
+        println("Select a valid choice\n")
+        println("Would you like to start the game?")
+        println("[E]xit")
+        println("[C]ontinue")
     }
 
     return choice
@@ -67,21 +69,20 @@ fun userNameSelect(){
 
 }
 
+// HERE $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 fun gameStart(){
     //Randomising who starts:
     players.shuffle()
-    print("${players.first()} is starting.")
-
+    println("${players.first()} is starting.")
+    boardCell.add(boxDrawBlank()
+    print("$boardCell")
 }
+// HERE $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 
 fun boxDrawBlank(){
-    println("╔═════════╗".repeat(16))
-    println("║    +    ║".repeat(16))
-    println("╚═════════╝".repeat(16))
-
-    println("╔═════════╗".repeat(16))
-    println("║    -    ║".repeat(16))
-    println("╚═════════╝".repeat(16))
+    println("╔═════════╗")
+    println("║         ║")
+    print("  ╚═════════╝")
 }
 
 
