@@ -24,34 +24,36 @@ fun main() {
     sleep(1000)
     println("Please read through the rules before playing the game, you will need 2 players.")
 
-    userOptions()
+    val choice = userOptions()
+    when (choice) {
+        'C' -> {
+//                boxDrawBlank()
+            userNameSelect()
+            gameStart()
+        }
 
-
-    while (true) {
-        val action: Char = readln().first().uppercaseChar()
-        when (action) {
-            'C' -> {
-                boxDrawBlank()
-                userNameSelect()
-                gameStart()
-            }
-
-            'E' -> {
-                println("Goodbye!")
-                break
-            }
-
-            if (userStart() != null) -> {
-                println("Please select a valid input!")
-                userOptions()
-            }
+        'E' -> {
+            println("Goodbye!")
+            break
         }
     }
 }
-fun userOptions(){
+
+
+fun userOptions(): Char {
     println("Would you like to start the game?")
     println("[E]xit")
     println("[C]ontinue")
+
+    var choice: Char?
+    while (true) {
+        print("Choice: ")
+        choice = readlnOrNull()?.trim()?.firstOrNull()?.uppercaseChar()
+        if (choice != null && choice in "EC") break
+        println("INVALID\n")
+    }
+
+    return choice
 }
 
 fun userNameSelect(){
@@ -70,17 +72,16 @@ fun gameStart(){
     players.shuffle()
     print("${players.first()} is starting.")
 
-
 }
 
 fun boxDrawBlank(){
-    println("╔════════╗".repeat(16))
-    println("║   ⬛  ║".repeat(16))
-    println("╚════════╝".repeat(16))
+    println("╔═════════╗".repeat(16))
+    println("║    +    ║".repeat(16))
+    println("╚═════════╝".repeat(16))
 
-    println("╔════════╗".repeat(16))
-    println("║   ⬜  ║".repeat(16))
-    println("╚════════╝".repeat(16))
+    println("╔═════════╗".repeat(16))
+    println("║    -    ║".repeat(16))
+    println("╚═════════╝".repeat(16))
 }
 
 
