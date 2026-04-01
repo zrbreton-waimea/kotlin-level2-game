@@ -1,6 +1,8 @@
 import java.lang.Thread.sleep
-val boardCell = mutableListOf<String>()
+val boardCells = mutableListOf<Char>()
 val players = mutableListOf<String>()
+val boardSize = 16
+//Change to alter board size
 /**
  * =====================================================================
  * Programming Project for NCEA Level 2, Standard 91896
@@ -27,7 +29,7 @@ fun main() {
     val choice = userOptions()
     when (choice) {
         'C' -> {
-//            boxDrawBlank()
+            //boxDrawBlank.()
             userNameSelect()
             gameStart()
         }
@@ -38,6 +40,16 @@ fun main() {
     }
 }
 
+fun boxDrawBlank(board: MutableList<Char>) {
+    println(  "╔═════════╗".repeat(board.size))
+    board.forEach {
+        print("║    a    ║")
+    }
+    println(  "╚═════════╝".repeat(board.size))
+}
+//╔═════════╗
+//║  value  ║
+//╚═════════╝
 
 fun userOptions(): Char {
     println("Would you like to start the game?")
@@ -69,20 +81,33 @@ fun userNameSelect(){
 
 }
 
-// HERE $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
-fun gameStart(){
+
+fun gameStart() {
     //Randomising who starts:
     players.shuffle()
     println("${players.first()} is starting.")
-    boardCell.add(boxDrawBlank()
-    print("$boardCell")
-}
-// HERE $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 
-fun boxDrawBlank(){
-    println("╔═════════╗")
-    println("║         ║")
-    print("  ╚═════════╝")
+//Board drawn
+    boxDrawPre()
+    boardCells.shuffle()
+    println("$boardCells")
+
+}
+
+fun boxDrawPre(){
+//    println("╔═════════╗")
+//    println("║         ║")
+//    print("  ╚═════════╝")
+    repeat(boardSize - 5){
+        boardCells.add('_')
+    }
+    repeat(boardSize - 12){
+        boardCells.add('*')
+    }
+    repeat(boardSize - 15){
+        boardCells.add('o')
+    }
+
 }
 
 
