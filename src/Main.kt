@@ -29,7 +29,6 @@ fun main() {
     val choice = userOptions()
     when (choice) {
         'C' -> {
-            //boxDrawBlank.()
             userNameSelect()
             gameStart()
         }
@@ -40,12 +39,23 @@ fun main() {
     }
 }
 
-fun boxDrawBlank(board: MutableList<Char>) {
-    println(  "╔═════════╗".repeat(board.size))
-    board.forEach {
-        print("║    a    ║")
-    }
-    println(  "╚═════════╝".repeat(board.size))
+fun boxCreate() {
+    print("┏")
+    print(  "━━━━━━━┳".repeat(boardSize - 1))
+    println(  "━━━━━━━┓")
+
+        boardCells.forEach {
+            print("┃   $it   ")
+        }
+
+    print("┃")
+    println()
+    print("┗")
+    print("━━━━━━━┻".repeat(boardSize - 1))
+    println(  "━━━━━━━┛")
+
+
+
 }
 //╔═════════╗
 //║  value  ║
@@ -87,17 +97,14 @@ fun gameStart() {
     players.shuffle()
     println("${players.first()} is starting.")
 
-//Board drawn
-    boxDrawPre()
+//Board
+    boardCellCreate()
     boardCells.shuffle()
-    println("$boardCells")
+    boxCreate()
 
 }
 
-fun boxDrawPre(){
-//    println("╔═════════╗")
-//    println("║         ║")
-//    print("  ╚═════════╝")
+fun boardCellCreate(){
     repeat(boardSize - 5){
         boardCells.add('_')
     }
