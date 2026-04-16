@@ -2,6 +2,8 @@ import java.lang.Thread.sleep
 val boardCells = mutableListOf<Char>()
 val players = mutableListOf<String>()
 val boardSize = 16
+val p1Score = 0
+val p2Score = 0
 //Change to alter board size
 /**
  * =====================================================================
@@ -30,7 +32,7 @@ fun main() {
     when (choice) {
         'C' -> {
             userNameSelect()
-            gameStart()
+            gameMain()
         }
 
         'E' -> {
@@ -39,24 +41,6 @@ fun main() {
     }
 }
 
-fun boxCreate() {
-    print("┏")
-    print(  "━━━━━━━┳".repeat(boardSize - 1))
-    println(  "━━━━━━━┓")
-
-        boardCells.forEach {
-            print("┃   $it   ")
-        }
-
-    print("┃")
-    println()
-    print("┗")
-    print("━━━━━━━┻".repeat(boardSize - 1))
-    println(  "━━━━━━━┛")
-
-
-
-}
 //╔═════════╗
 //║  value  ║
 //╚═════════╝
@@ -82,31 +66,48 @@ fun userOptions(): Char {
 
 fun userNameSelect(){
     println("Enter your name (Player1): ")
-    var userName1 = readln()
-    players.add(userName1)
+    val player1 = readln()
+    players.add(player1)
 
     println("Enter your name (Player2): ")
-    var userName2 = readln()
-    players.add(userName2)
+    val player2 = readln()
+    players.add(player2)
+
 
 }
 
+fun boxCreate() {
 
-fun gameStart() {
-    //Randomising who starts:
-    players.shuffle()
-    println("${players.first()} is starting.")
+    for (i in 1..9) {
+        print("    $i   ")
+    }
+    for (i in 10..boardSize) {
+        print("   $i   ")
+    }
 
-//Board
-    boardCellCreate()
-    boardCells.shuffle()
-    boxCreate()
+    println()
+
+    print("┏")
+    print(  "━━━━━━━┳".repeat(boardCells.size - 1))
+    println(  "━━━━━━━┓")
+
+    boardCells.forEach {
+        print("┃   $it   ")
+    }
+
+    print("┃")
+    println()
+    print("┗")
+    print("━━━━━━━┻".repeat(boardCells.size - 1))
+    println(  "━━━━━━━┛")
+
+
 
 }
 
-fun boardCellCreate(){
+fun boardCellItems(){
     repeat(boardSize - 5){
-        boardCells.add('_')
+        boardCells.add(' ')
     }
     repeat(boardSize - 12){
         boardCells.add('*')
@@ -117,6 +118,46 @@ fun boardCellCreate(){
 
 }
 
+//fun playerScore(){
+//
+//}
+
+fun playerInput(){
+    readln()
+}
+
+fun playersTurn(){
+    val temp = players[0]
+    players[0] = players[1]
+    players[1] = temp
+}
+fun gameMain(): Int {
+    //Randomising who starts:
+    players.shuffle()
+    println("${players.first()} is starting.")
+
+    //Board item piece creation and random placement
+    boardCellItems()
+    boardCells.shuffle()
+
+    while(p1Score < 1 || p2Score < 1) {
+        boxCreate()
+
+
+        var choice: Int?
+        while (true) {
+            print("${players.first()}, please select a cell from the board to move. ")
+            choice = readlnOrNull()?.trim()?.toIntOrNull()
+            if (choice != null && choice in 1..boardSize) break
+            println("Select a valid option\n")
+        }
+        continue
+
+        playersTurn()
+        println("${players.first()}'s turn.")
+    }
+
+}
 
 fun userStart(): Char {
     val start: Char = readln().first().uppercaseChar()
