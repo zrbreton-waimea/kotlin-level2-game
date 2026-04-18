@@ -1,7 +1,7 @@
 import java.lang.Thread.sleep
 val boardCells = mutableListOf<Char>()
 val players = mutableListOf<String>()
-val boardSize = 18
+val boardSize = 16
 val p1Score = 0
 val p2Score = 0
 //Change to alter board size
@@ -106,7 +106,7 @@ fun boardCellItems(){
     val blankPieces = whitePc + blackPc
 
     repeat(boardSize - blankPieces) {
-        boardCells.add(' ')
+        boardCells.add('-')
     }
     repeat(blackPc){
         boardCells.add('*')
@@ -144,24 +144,28 @@ fun gameMain(): Int {
 
         var choice: Int?
         while (true) {
-            print("${players.first()}, please select a cell from the board to move. ")
+
+            println("${players.first()}, please select a piece from the board to move. ")
             choice = readlnOrNull()?.trim()?.toIntOrNull()
+            if (choice != null) {
+                val temp = boardCells[choice]
 
-            println("Where would you like to move this piece, choose a place on the board.")
-            val playerMovePc = readlnOrNull()?.trim()?.toIntOrNull()
+                println("Where would you like to move this piece, choose a place on the board.")
+                val playerMovePc = readlnOrNull()?.trim()?.toIntOrNull()
+                if (playerMovePc != null) {
+                    boardCells[playerMovePc] = boardCells[choice]
+                    boardCells[choice] = temp
 
-            
+                }
+            }
+
             if (choice != null && choice in 1..boardSize) break
             println("Select a valid option\n")
         }
-
-
-
-
         playersTurn()
         println("${players.first()}'s turn.")
     }
-    return 1
+    return 0
 }
 
 
