@@ -1,7 +1,7 @@
 import java.lang.Thread.sleep
 val boardCells = mutableListOf<Char>()
 val players = mutableListOf<String>()
-val boardSize = 16
+val boardSize = 18
 val p1Score = 0
 val p2Score = 0
 //Change to alter board size
@@ -78,11 +78,8 @@ fun userNameSelect(){
 
 fun boxCreate() {
 
-    for (i in 1..9) {
-        print("    $i   ")
-    }
-    for (i in 10..boardSize) {
-        print("   $i   ")
+    for (i in 1..boardSize) {
+        print("   $i".padEnd(8))
     }
 
     println()
@@ -101,21 +98,22 @@ fun boxCreate() {
     print("━━━━━━━┻".repeat(boardCells.size - 1))
     println(  "━━━━━━━┛")
 
-
-
 }
 
 fun boardCellItems(){
-    repeat(boardSize - 5){
+    val whitePc = 4
+    val blackPc = 1
+    val blankPieces = whitePc + blackPc
+
+    repeat(boardSize - blankPieces) {
         boardCells.add(' ')
     }
-    repeat(boardSize - 12){
+    repeat(blackPc){
         boardCells.add('*')
     }
-    repeat(boardSize - 15){
+    repeat(whitePc){
         boardCells.add('o')
     }
-
 }
 
 //fun playerScore(){
@@ -123,7 +121,7 @@ fun boardCellItems(){
 //}
 
 fun playerInput(){
-    readln()
+
 }
 
 fun playersTurn(){
@@ -131,6 +129,7 @@ fun playersTurn(){
     players[0] = players[1]
     players[1] = temp
 }
+
 fun gameMain(): Int {
     //Randomising who starts:
     players.shuffle()
@@ -143,21 +142,28 @@ fun gameMain(): Int {
     while(p1Score < 1 || p2Score < 1) {
         boxCreate()
 
-
         var choice: Int?
         while (true) {
             print("${players.first()}, please select a cell from the board to move. ")
             choice = readlnOrNull()?.trim()?.toIntOrNull()
+
+            println("Where would you like to move this piece, choose a place on the board.")
+            val playerMovePc = readlnOrNull()?.trim()?.toIntOrNull()
+
+            
             if (choice != null && choice in 1..boardSize) break
             println("Select a valid option\n")
         }
-        continue
+
+
+
 
         playersTurn()
         println("${players.first()}'s turn.")
     }
-
+    return 1
 }
+
 
 fun userStart(): Char {
     val start: Char = readln().first().uppercaseChar()

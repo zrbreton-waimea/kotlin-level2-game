@@ -33,7 +33,7 @@ The game rules...
 
 ### Game Setup
 - A row of 16 squares, numbered 1 to 16 from left to right
-- 5 counters (total) are placed randomly on the board - 4 white and 1 black
+- 5 counters (total) are placed randomly on the board - 4 white (*) and 1 black (o)
 - Decide who goes first
 
 ### Gameplay
