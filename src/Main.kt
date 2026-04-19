@@ -1,4 +1,5 @@
 import java.lang.Thread.sleep
+import java.util.*
 val boardCells = mutableListOf<Char>()
 val players = mutableListOf<String>()
 val boardSize = 16
@@ -27,7 +28,6 @@ fun main() {
     println("Welcome to Pinned!")
     sleep(1000)
     println("Please read through the rules before playing the game, you will need 2 players.")
-
     val choice = userOptions()
     when (choice) {
         'C' -> {
@@ -40,10 +40,6 @@ fun main() {
         }
     }
 }
-
-//╔═════════╗
-//║  value  ║
-//╚═════════╝
 
 fun userOptions(): Char {
     println("Would you like to start the game?")
@@ -148,14 +144,11 @@ fun gameMain(): Int {
             println("${players.first()}, please select a piece from the board to move. ")
             choice = readlnOrNull()?.trim()?.toIntOrNull()
             if (choice != null) {
-                val temp = boardCells[choice]
-
                 println("Where would you like to move this piece, choose a place on the board.")
                 val playerMovePc = readlnOrNull()?.trim()?.toIntOrNull()
-                if (playerMovePc != null) {
-                    boardCells[playerMovePc] = boardCells[choice]
-                    boardCells[choice] = temp
 
+                if (playerMovePc != null) {
+                    Collections.swap(boardCells, choice - 1 , playerMovePc - 1)
                 }
             }
 
