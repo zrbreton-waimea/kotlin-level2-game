@@ -1,5 +1,7 @@
 import java.lang.Thread.sleep
 import java.util.*
+import kotlin.math.sign
+
 val boardCells = mutableListOf<Char>()
 val players = mutableListOf<String>()
 val boardSize = 16
@@ -143,12 +145,15 @@ fun gameMain(): Int {
 
             println("${players.first()}, please select a piece from the board to move. ")
             choice = readlnOrNull()?.trim()?.toIntOrNull()
-            if (choice != null) {
+            if (choice != null && choice > 1 && choice < boardSize-2) {
                 println("Where would you like to move this piece, choose a place on the board.")
                 val playerMovePc = readlnOrNull()?.trim()?.toIntOrNull()
 
-                if (playerMovePc != null) {
-                    Collections.swap(boardCells, choice - 1 , playerMovePc - 1)
+                if (playerMovePc != null && playerMovePc > 1 && playerMovePc < boardSize-2) {
+                    if ((choice - playerMovePc).sign == -1){
+                        Collections.swap(boardCells, choice - 1 , playerMovePc - 1)
+                    }
+                    print("You cannot move to the right, you must move pieces to the left. ")
                 }
             }
 
@@ -159,10 +164,4 @@ fun gameMain(): Int {
         println("${players.first()}'s turn.")
     }
     return 0
-}
-
-
-fun userStart(): Char {
-    val start: Char = readln().first().uppercaseChar()
-    return start
 }
