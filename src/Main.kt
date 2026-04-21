@@ -23,51 +23,52 @@ val p2Score = 0
 
 
 
+
 fun main() {
-    println("┌──────────────────────────────┐")
-    println("│~        Game: Pinned!       ~│")
-    println("└──────────────────────────────┘")
-    println("Welcome to Pinned!")
+    println("┌──────────────────────────────┐".magenta())
+    println("│~        Game: Pinned!       ~│".magenta())
+    println("└──────────────────────────────┘".magenta())
+    println("Welcome to Pinned!".cyan())
     sleep(1000)
-    println("Please read through the rules before playing the game, you will need 2 players.")
+    println("Please read through the rules before playing the game, you will need 2 players.".cyan())
     val choice = userOptions()
     when (choice) {
-        'C' -> {
+        'P' -> {
             userNameSelect()
             gameMain()
         }
 
         'E' -> {
-            println("Goodbye!")
+            println("Thanks for stopping by!".cyan())
         }
     }
 }
 
 fun userOptions(): Char {
-    println("Would you like to start the game?")
-    println("[E]xit")
-    println("[C]ontinue")
+    println("Would you like to start the game?".cyan())
+    println("[E]xit".cyan())
+    println("[P]lay".cyan())
 
     var choice: Char?
     while (true) {
-        print("Choice: ")
+        print("Choice: ".cyan())
         choice = readlnOrNull()?.trim()?.firstOrNull()?.uppercaseChar()
-        if (choice != null && choice in "EC") break
-        println("Select a valid choice\n")
-        println("Would you like to start the game?")
-        println("[E]xit")
-        println("[C]ontinue")
+        if (choice != null && choice in "PE") break
+        println("Select a valid choice\n".cyan())
+        println("Would you like to start the game?".cyan())
+        println("[E]xit".cyan())
+        println("[P]lay".cyan())
     }
 
     return choice
 }
 
 fun userNameSelect(){
-    println("Enter your name (Player1): ")
+    println("Enter your name (Player1): ".cyan())
     val player1 = readln()
     players.add(player1)
 
-    println("Enter your name (Player2): ")
+    println("Enter your name (Player2): ".cyan())
     val player2 = readln()
     players.add(player2)
 
@@ -77,24 +78,26 @@ fun userNameSelect(){
 fun boxCreate() {
 
     for (i in 1..boardSize) {
-        print("   $i".padEnd(8))
+        print("   $i".padEnd(8).yellow())
     }
 
     println()
 
-    print("┏")
-    print(  "━━━━━━━┳".repeat(boardCells.size - 1))
-    println(  "━━━━━━━┓")
+    print("┏".magenta())
+    print(  "━━━━━━━┳".repeat(boardCells.size - 1).magenta())
+    println(  "━━━━━━━┓".magenta())
 
     boardCells.forEach {
-        print("┃   $it   ")
+        print("┃".magenta())
+        print("   $it   ".cyan())
+
     }
 
-    print("┃")
+    print("┃".magenta())
     println()
-    print("┗")
-    print("━━━━━━━┻".repeat(boardCells.size - 1))
-    println(  "━━━━━━━┛")
+    print("┗".magenta())
+    print("━━━━━━━┻".repeat(boardCells.size - 1).magenta())
+    println(  "━━━━━━━┛".magenta())
 
 }
 
@@ -114,20 +117,15 @@ fun boardCellItems(){
     }
 }
 
-//fun playerScore(){
-//
-//}
-
-fun playerInput(){
-
-}
-
 fun playersTurn(){
     val temp = players[0]
     players[0] = players[1]
     players[1] = temp
 }
 
+fun playerBoardInput(){
+
+}
 fun gameMain(): Int {
     //Randomising who starts:
     players.shuffle()
@@ -145,20 +143,37 @@ fun gameMain(): Int {
 
             println("${players.first()}, please select a piece from the board to move. ")
             choice = readlnOrNull()?.trim()?.toIntOrNull()
+
+            // Check to see if a coin is being removed
+            if (choice != null && choice == 1 ) {
+                val winPc = boardCells[0]
+                boardCells[0] = '-'
+
+                // Was it the winning coin?
+                if (winPc == '*') {
+
+                }
+            }
+
+
+
+            // Not removing, so check if it's a ,mmove
             if (choice != null && choice > 1 && choice < boardSize-2) {
                 println("Where would you like to move this piece, choose a place on the board.")
                 val playerMovePc = readlnOrNull()?.trim()?.toIntOrNull()
 
                 if (playerMovePc != null && playerMovePc > 1 && playerMovePc < boardSize-2) {
-                    if ((choice - playerMovePc).sign == -1){
+                    if ((choice - playerMovePc).sign == 1){
                         Collections.swap(boardCells, choice - 1 , playerMovePc - 1)
                     }
-                    print("You cannot move to the right, you must move pieces to the left. ")
+                    else{
+                        println("You cannot move to the right or on top of another piece, you must move pieces to the left. ".red())
+                    }
                 }
             }
 
             if (choice != null && choice in 1..boardSize) break
-            println("Select a valid option\n")
+            println("Select a valid option.\n".red())
         }
         playersTurn()
         println("${players.first()}'s turn.")
