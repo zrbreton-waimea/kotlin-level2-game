@@ -4,9 +4,9 @@ import kotlin.math.sign
 
 val boardCells = mutableListOf<Char>()
 val players = mutableListOf<String>()
+val playersScore = mutableListOf<String>()
+val won = mutableListOf<String>()
 val boardSize = 16
-val p1Score = 0
-val p2Score = 0
 //Change to alter board size
 /**
  * =====================================================================
@@ -118,9 +118,14 @@ fun boardCellItems(){
 }
 
 fun playersTurn(){
-    val temp = players[0]
-    players[0] = players[1]
-    players[1] = temp
+    var currentPlayer = players[0]
+
+    if (currentPlayer == players[0]){
+        currentPlayer = players[1]
+    }
+    else{
+        currentPlayer = players[0]
+    }
 }
 
 fun playerBoardInput(){
@@ -135,7 +140,7 @@ fun gameMain(): Int {
     boardCellItems()
     boardCells.shuffle()
 
-    while(p1Score < 1 || p2Score < 1) {
+    while(true) {
         boxCreate()
 
         var choice: Int?
@@ -149,9 +154,10 @@ fun gameMain(): Int {
                 val winPc = boardCells[0]
                 boardCells[0] = '-'
 
+
                 // Was it the winning coin?
                 if (winPc == '*') {
-
+                    if ( == )
                 }
             }
 
