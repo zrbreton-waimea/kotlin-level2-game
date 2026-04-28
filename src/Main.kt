@@ -5,8 +5,10 @@ import kotlin.math.sign
 val boardCells = mutableListOf<Char>()
 val players = mutableListOf<String>()
 val playersScore = mutableListOf<String>()
+var currentPlayerIndex = 0
+
 val won = mutableListOf<String>()
-val boardSize = 16
+const val boardSize = 16
 //Change to alter board size
 /**
  * =====================================================================
@@ -118,35 +120,36 @@ fun boardCellItems(){
 }
 
 fun playersTurn(){
-    var currentPlayer = players[0]
-
-    if (currentPlayer == players[0]){
-        currentPlayer = players[1]
+    if (currentPlayerIndex == 0){
+        currentPlayerIndex = 1
     }
     else{
-        currentPlayer = players[0]
+        currentPlayerIndex = 0
     }
 }
 
 fun playerBoardInput(){
 
 }
-fun gameMain(): Int {
+fun gameMain() {
     //Randomising who starts:
-    players.shuffle()
-    println("${players.first()} is starting.")
+    currentPlayerIndex = (0..1).random()
+
+    println("${players[currentPlayerIndex]} is starting.")
 
     //Board item piece creation and random placement
     boardCellItems()
     boardCells.shuffle()
 
-    while(true) {
+    var playerHasWon = false
+
+    while(!playerHasWon) {
         boxCreate()
 
         var choice: Int?
-        while (true) {
+        while (!playerHasWon) {
 
-            println("${players.first()}, please select a piece from the board to move. ")
+            println("${players[currentPlayerIndex]}, please select a piece from the board to move. ")
             choice = readlnOrNull()?.trim()?.toIntOrNull()
 
             // Check to see if a coin is being removed
@@ -157,13 +160,14 @@ fun gameMain(): Int {
 
                 // Was it the winning coin?
                 if (winPc == '*') {
-                    if ( == )
+                    playerHasWon = true
+                    break               // Leave input loop
                 }
             }
 
 
 
-            // Not removing, so check if it's a ,mmove
+            // Not removing, so check if it's a move
             if (choice != null && choice > 1 && choice < boardSize-2) {
                 println("Where would you like to move this piece, choose a place on the board.")
                 val playerMovePc = readlnOrNull()?.trim()?.toIntOrNull()
@@ -181,8 +185,10 @@ fun gameMain(): Int {
             if (choice != null && choice in 1..boardSize) break
             println("Select a valid option.\n".red())
         }
+
+        if (playerHasWon) break         // Already won, so go no further
+
         playersTurn()
-        println("${players.first()}'s turn.")
+        println("${players[currentPlayerIndex]}'s turn.")
     }
-    return 0
 }
