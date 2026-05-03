@@ -157,22 +157,19 @@ fun gameMain() {
                 val winPc = boardCells[0]
                 boardCells[0] = '-'
 
-                // Was it the winning coin?
+                // Was it the winning piece
                 if (winPc == '*') {
                     playerHasWon = true
                 }
-
-                break               // Leave input loop as turn is done
+                break               // Leave input loop as turn is done.
             }
 
-
-
-            // Not removing, so check if it's a move
+            // Not removing any pieces, checking for a move.
             if (choice != null && choice > 1 && choice < boardSize-2) {
                 println("Where would you like to move this piece, choose a place on the board.")
                 val playerMovePc = readlnOrNull()?.trim()?.toIntOrNull()
 
-                if (playerMovePc != null && playerMovePc in 1.. boardSize-1) {
+                if (playerMovePc != null && playerMovePc in 1..<boardSize) {
                     if (playerMovePc < choice){
                         Collections.swap(boardCells, choice - 1 , playerMovePc - 1)
                         break
@@ -185,9 +182,16 @@ fun gameMain() {
                     println("Select a valid option.\n".red())
                 }
             }
+            else{
+                println("Please enter a valid input, choose a piece to move.".red())
+            }
         }
 
-        if (playerHasWon) break         // Already won, so go no further
+            if (playerHasWon)
+            {
+                println("${players[currentPlayerIndex]} has won! Congrats!")
+                break
+            }        // Winning player has been decided so break out of main loop
 
         playersTurn()
         println("${players[currentPlayerIndex]}'s turn.")
