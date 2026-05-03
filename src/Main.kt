@@ -6,10 +6,9 @@ val boardCells = mutableListOf<Char>()
 val players = mutableListOf<String>()
 val playersScore = mutableListOf<String>()
 var currentPlayerIndex = 0
+const val boardSize = 16 //Change to alter board size
+const val usernameLimit = 13
 
-val won = mutableListOf<String>()
-const val boardSize = 16
-//Change to alter board size
 /**
  * =====================================================================
  * Programming Project for NCEA Level 2, Standard 91896
@@ -22,9 +21,6 @@ const val boardSize = 16
  * PROJECT NOTES HERE
  * =====================================================================
  */
-
-
-
 
 fun main() {
     println("┌──────────────────────────────┐".magenta())
@@ -56,7 +52,7 @@ fun userOptions(): Char {
         print("Choice: ".cyan())
         choice = readlnOrNull()?.trim()?.firstOrNull()?.uppercaseChar()
         if (choice != null && choice in "PE") break
-        println("Select a valid choice\n".cyan())
+        println("Select a valid choice.".red())
         println("Would you like to start the game?".cyan())
         println("[E]xit".cyan())
         println("[P]lay".cyan())
@@ -66,15 +62,27 @@ fun userOptions(): Char {
 }
 
 fun userNameSelect(){
-    println("Enter your name (Player1): ".cyan())
-    val player1 = readln()
-    players.add(player1)
+    while(true){
+        println("Enter your name (Player1): ".cyan())
+        val player1 = readln()
+        players.add(player1)
 
-    println("Enter your name (Player2): ".cyan())
-    val player2 = readln()
-    players.add(player2)
+        if(player1.length > usernameLimit) {
+            println("Please choose a user name that has a maximum length of $usernameLimit characters.".red())
+        }
+        else break
+    }
 
+    while(true){
+        println("Enter your name (Player2): ".cyan())
+        val player2 = readln()
+        players.add(player2)
 
+        if(player2.length > usernameLimit) {
+            println("Please choose a user name that has a maximum length of $usernameLimit characters.".red())
+        }
+        else break
+    }
 }
 
 fun boxCreate() {
@@ -128,9 +136,6 @@ fun playersTurn(){
     }
 }
 
-fun playerBoardInput(){
-
-}
 fun gameMain() {
     //Randomising who starts:
     currentPlayerIndex = (0..1).random()
@@ -191,7 +196,7 @@ fun gameMain() {
             {
                 println("${players[currentPlayerIndex]} has won! Congrats!")
                 break
-            }        // Winning player has been decided so break out of main loop
+            }        // Winning player has been decided so break out of main loop.
 
         playersTurn()
         println("${players[currentPlayerIndex]}'s turn.")
