@@ -150,14 +150,14 @@ fun gameMain() {
     while(!playerHasWon) {
         boxDraw()
 
-        var choice: Int?
+        var playerPieceSelect: Int?
         while (!playerHasWon) {
 
             println("${players[currentPlayerIndex]}, please select a piece from the board to move. ")
-            choice = readlnOrNull()?.trim()?.toIntOrNull()
+            playerPieceSelect = readlnOrNull()?.trim()?.toIntOrNull()
 
             // Check to see if a coin is being removed
-            if (choice != null && choice == 1 ) {
+            if (playerPieceSelect != null && playerPieceSelect == 1 ) {
                 val winPc = boardCells[0]
                 boardCells[0] = '-'
 
@@ -169,12 +169,12 @@ fun gameMain() {
             }
 
             // Not removing any pieces, checking for a move.
-            if (choice != null && choice > 1 && choice < boardSize-2) {
+            if (playerPieceSelect != null && playerPieceSelect > 1 && playerPieceSelect <= boardSize) {
                 println("Where would you like to move this piece, choose a place on the board.")
-                val playerMovePc = readlnOrNull()?.trim()?.toIntOrNull()
-                if (playerMovePc != null && playerMovePc in 1..<boardSize) {
-                    if (playerMovePc < choice && boardCells[playerMovePc] != '-' ){
-                        Collections.swap(boardCells, choice - 1 , playerMovePc - 1)
+                val playerPieceMove = readlnOrNull()?.trim()?.toIntOrNull()
+                if (playerPieceMove != null && playerPieceMove in 1..<boardSize) {
+                    if (playerPieceMove < playerPieceSelect && boardCells[playerPieceMove-1] != 'o' && boardCells[playerPieceMove-1] != '*') {
+                        Collections.swap(boardCells, playerPieceSelect - 1 , playerPieceMove - 1)
                         break
                     }
                     else{
