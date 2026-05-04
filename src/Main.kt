@@ -7,6 +7,7 @@ val playersScore = mutableListOf<String>()
 var currentPlayerIndex = 0
 const val boardSize = 16 //Change to alter board size
 const val usernameLimit = 13
+const val playerLimit = 2
 
 /**
  * =====================================================================
@@ -61,27 +62,21 @@ fun userOptions(): Char {
 }
 
 fun userNameSelect(){
-    while(true){
-        println("Enter your name (Player1): ".cyan())
-        val player1 = readln()
-        players.add(player1)
-
-        if(player1.length > usernameLimit) {
-            println("Please choose a user name that has a maximum length of $usernameLimit characters.".red())
+    (1..playerLimit).forEach {
+        while(true){
+            println("Enter your name (Player${it}): ".cyan())
+            val playerUsernames = readln()
+            players.add(playerUsernames)
+            if(playerUsernames.isBlank()) {
+                println("Please choose a user name that has characters, must NOT be blank.".red())
+            }
+            if(playerUsernames.length > usernameLimit) {
+                println("Please choose a user name that has a maximum length of $usernameLimit characters.".red())
+            }
+            else break
         }
-        else break
     }
 
-    while(true){
-        println("Enter your name (Player2): ".cyan())
-        val player2 = readln()
-        players.add(player2)
-
-        if(player2.length > usernameLimit) {
-            println("Please choose a user name that has a maximum length of $usernameLimit characters.".red())
-        }
-        else break
-    }
 }
 
 fun boxDraw() {
