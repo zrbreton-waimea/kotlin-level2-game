@@ -1,6 +1,5 @@
 import java.lang.Thread.sleep
 import java.util.*
-import kotlin.math.sign
 
 val boardCells = mutableListOf<Char>()
 val players = mutableListOf<String>()
@@ -85,7 +84,7 @@ fun userNameSelect(){
     }
 }
 
-fun boxCreate() {
+fun boxDraw() {
 
     for (i in 1..boardSize) {
         print("   $i".padEnd(8).yellow())
@@ -149,7 +148,7 @@ fun gameMain() {
     var playerHasWon = false
 
     while(!playerHasWon) {
-        boxCreate()
+        boxDraw()
 
         var choice: Int?
         while (!playerHasWon) {
@@ -173,14 +172,14 @@ fun gameMain() {
             if (choice != null && choice > 1 && choice < boardSize-2) {
                 println("Where would you like to move this piece, choose a place on the board.")
                 val playerMovePc = readlnOrNull()?.trim()?.toIntOrNull()
-
                 if (playerMovePc != null && playerMovePc in 1..<boardSize) {
-                    if (playerMovePc < choice){
+                    if (playerMovePc < choice && boardCells[playerMovePc] != '-' ){
                         Collections.swap(boardCells, choice - 1 , playerMovePc - 1)
                         break
                     }
                     else{
                         println("You cannot move to the right or on top of another piece, you must move pieces to the left. ".red())
+                        boxDraw()
                     }
                 }
                 else {
