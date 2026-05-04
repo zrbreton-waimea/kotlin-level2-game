@@ -70,7 +70,7 @@ fun userNameSelect(){
             if(playerUsernames.isBlank()) {
                 println("Please choose a user name that has characters, must NOT be blank.".red())
             }
-            if(playerUsernames.length > usernameLimit) {
+            else if(playerUsernames.length > usernameLimit) {
                 println("Please choose a user name that has a maximum length of $usernameLimit characters.".red())
             }
             else break
