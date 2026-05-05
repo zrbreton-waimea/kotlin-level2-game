@@ -10,9 +10,9 @@ Terminology:
 
 ---
 
-## Example Test Name
+## User choice, exit or play game. 
 
-Example test description. Example test description. Example test description. Example test description. Example test description. Example test description.
+The user(s) will choose whether to play the game or exit, they will choose P to continue 
 
 ### Test Data To Use
 

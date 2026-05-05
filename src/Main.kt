@@ -3,10 +3,9 @@ import java.util.*
 
 val boardCells = mutableListOf<Char>()
 val players = mutableListOf<String>()
-val playersScore = mutableListOf<String>()
 var currentPlayerIndex = 0
 const val boardSize = 16 //Change to alter board size
-const val usernameLimit = 13
+const val usernameLimit = 13 //Change to increase or decrease the allowed username char limit
 const val playerLimit = 2
 
 /**
@@ -27,7 +26,34 @@ fun main() {
     println("│~        Game: Pinned!       ~│".magenta())
     println("└──────────────────────────────┘".magenta())
     println("Welcome to Pinned!".cyan())
-    sleep(1000)
+    sleep(800)
+    print("Loading rules".yellow())
+    sleep(400)
+    print(".")
+    sleep(400)
+    print(".")
+    sleep(400)
+    println(".")
+    sleep(400)
+
+    println("Game rules:\n" +
+            "\n" +
+            " Pinned \uD83D\uDCCC\n" +
+            "\n" +
+            "Game Setup\n" +
+            "- A row of 16 squares, numbered 1 to 16 from left to right\n" +
+            "- 5 counters (total) are placed randomly on the board - 4 white (*) and 1 black (o)\n" +
+            "- Decide who goes first\n" +
+            "\n" +
+            "Gameplay\n" +
+            "- Players take turns - You may not skip your turn\n" +
+            "- On your turn you must do exactly one of the following:\n" +
+            "  - Slide any counter (black(*) or white(o)) any number of squares to the left, as long as no other counter is in the way and the destination square is empty, or...\n" +
+            "  - Remove the counter on square 1 (only if a counter is there)\n" +
+            "\n" +
+            "Win Condition\n" +
+            "- The player who removes the black counter (*) from square 1 wins\n")
+
     println("Please read through the rules before playing the game, you will need 2 players.".cyan())
     val choice = userOptions()
     when (choice) {
@@ -41,7 +67,7 @@ fun main() {
         }
     }
 }
-
+//Game start menu input handling
 fun userOptions(): Char {
     println("Would you like to start the game?".cyan())
     println("[E]xit".cyan())
@@ -60,25 +86,27 @@ fun userOptions(): Char {
 
     return choice
 }
-
+//Handles username inputs and checks if they are valid.
 fun userNameSelect(){
     (1..playerLimit).forEach {
         while(true){
             println("Enter your name (Player${it}): ".cyan())
             val playerUsernames = readln()
-            players.add(playerUsernames)
             if(playerUsernames.isBlank()) {
                 println("Please choose a user name that has characters, must NOT be blank.".red())
             }
+
             else if(playerUsernames.length > usernameLimit) {
                 println("Please choose a user name that has a maximum length of $usernameLimit characters.".red())
             }
-            else break
+            else{
+                players.add(playerUsernames)
+                break
+            }
         }
     }
-
 }
-
+//This function draws the board, this will change with the size of the board.
 fun boxDraw() {
 
     for (i in 1..boardSize) {
@@ -104,7 +132,7 @@ fun boxDraw() {
     println(  "━━━━━━━┛".magenta())
 
 }
-
+//This function adds the necessary pieces to do the board.
 fun boardCellItems(){
     val whitePc = 4
     val blackPc = 1
@@ -141,6 +169,7 @@ fun gameMain() {
     boardCells.shuffle()
 
     var playerHasWon = false
+    var invalidJump = false
 
     while(!playerHasWon) {
         boxDraw()
@@ -153,11 +182,11 @@ fun gameMain() {
 
             // Check to see if a coin is being removed
             if (playerPieceSelect != null && playerPieceSelect == 1 ) {
-                val winPc = boardCells[0]
+                val winPiece = boardCells[0]
                 boardCells[0] = '-'
 
                 // Was it the winning piece
-                if (winPc == '*') {
+                if (winPiece == '*') {
                     playerHasWon = true
                 }
                 break               // Leave input loop as turn is done.
@@ -168,12 +197,24 @@ fun gameMain() {
                 println("Where would you like to move this piece, choose a place on the board.")
                 val playerPieceMove = readlnOrNull()?.trim()?.toIntOrNull()
                 if (playerPieceMove != null && playerPieceMove in 1..<boardSize) {
+
+                    //Checking whether player has jumped over a piece, if they have then prompt
                     if (playerPieceMove < playerPieceSelect && boardCells[playerPieceMove-1] != 'o' && boardCells[playerPieceMove-1] != '*') {
-                        Collections.swap(boardCells, playerPieceSelect - 1 , playerPieceMove - 1)
-                        break
+                        for(i in playerPieceMove..<playerPieceSelect-1){
+                            if(!invalidJump && boardCells[i] == 'o' || boardCells[i] == '*') {
+                                println("You cannot jump over other pieces on the board.".red())
+                                invalidJump = true
+                            }
+
+                        }
+                        //If the player makes no illegal moves, then move the piece they choose to the place on the board they chose.
+                        if (!invalidJump){
+                            Collections.swap(boardCells, playerPieceSelect - 1 , playerPieceMove - 1)
+                            break
+                        }
                     }
                     else{
-                        println("You cannot move to the right or on top of another piece, you must move pieces to the left. ".red())
+                        println("You cannot move to the right, on top of another piece or jump any pieces. You MUST move pieces to the left. ".red())
                         boxDraw()
                     }
                 }
