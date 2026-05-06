@@ -171,6 +171,20 @@ I will do this for player 1 and player 2.
 It shouldn't allow the pieces to be jump over other pieces, while moving to the left. It should display the user an error message saying that they cannot jump over pieces.
 
 ---
+## Gameplay: Player Piece Movement - INVALID
+
+I will move a cell that doesn't have anything in it.
+
+### Test Data To Use
+
+I will move a blank cell that doesn't have anything in it.
+
+### Expected Test Result
+
+It won't let you select a cell that is blank, it should respond with an error message telling them to do a valid move.
+
+
+---
 
 ## Gameplay: Player Piece Movement - BOUNDARY/VALID
 

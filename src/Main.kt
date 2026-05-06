@@ -67,6 +67,7 @@ fun main() {
         }
     }
 }
+
 //Game start menu input handling
 fun userOptions(): Char {
     println("Would you like to start the game?".cyan())
@@ -132,7 +133,7 @@ fun boxDraw() {
     println(  "━━━━━━━┛".magenta())
 
 }
-//This function adds the necessary pieces to do the board.
+//This function adds the necessary pieces to the board.
 fun boardCellItems(){
     val whitePc = 4
     val blackPc = 1
@@ -176,7 +177,7 @@ fun gameMain() {
         var playerPieceSelect: Int?
         while (!playerHasWon) {
             var invalidJump = false
-            var invalidRightMove = false
+            var invalidMoveRight = false
 
             println("${players[currentPlayerIndex]}, please select a piece from the board to move. ")
             playerPieceSelect = readlnOrNull()?.trim()?.toIntOrNull()
@@ -193,40 +194,41 @@ fun gameMain() {
                 break               // Leave input loop as turn is done.
             }
 
-            // Not removing any pieces, checking for a move.
+            // Checking if the players piece they selected is valid.
             if (playerPieceSelect != null && playerPieceSelect > 1 && playerPieceSelect <= boardSize && boardCells[playerPieceSelect-1] != '-') {
                 println("Where would you like to move this piece, choose a place on the board.")
                 val playerPieceMove = readlnOrNull()?.trim()?.toIntOrNull()
                 if (playerPieceMove != null && playerPieceMove in 1..<boardSize) {
 
-                    //Checking whether player has jumped over a piece, if they have then prompt
+                    //Checking whether player has jumped over a piece.
                     if (playerPieceMove < playerPieceSelect && boardCells[playerPieceMove-1] != 'o' && boardCells[playerPieceMove-1] != '*') {
-                        //If the player makes no illegal moves, then move the piece they choose to the place on the board they chose.
+                        //If the player makes no illegal moves, then the piece is moved.
                         for(i in playerPieceMove..<playerPieceSelect-1){
                             if(!invalidJump && boardCells[i] == 'o' || boardCells[i] == '*') {
                                 println("You cannot jump over other pieces on the board.".red())
                                 invalidJump = true
                             }
-
                         }
                     }
 
 
                     else if(playerPieceMove >= playerPieceSelect){
                         println("You cannot move to the right, on top of another piece or jump any pieces. You MUST move pieces to the left. ".red())
-                        invalidRightMove = true
+                        invalidMoveRight = true
                         boxDraw()
                     }
 
-                    if(!invalidJump && !invalidRightMove){
+                    if(!invalidJump && !invalidMoveRight){
                         Collections.swap(boardCells, playerPieceSelect - 1 , playerPieceMove - 1)
                         break
                     }
                 }
+
                 else {
                     println("Select a valid option.\n".red())
                 }
             }
+
             else{
                 println("Please enter a valid input, choose a piece to move.".red())
             }
