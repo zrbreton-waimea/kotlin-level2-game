@@ -48,7 +48,7 @@ fun main() {
             "Gameplay\n" +
             "- Players take turns - You may not skip your turn\n" +
             "- On your turn you must do exactly one of the following:\n" +
-            "  - Slide any counter (black(*) or white(o)) any number of squares to the left, as long as no other counter is in the way and the destination square is empty, or...\n" +
+            "  - Slide any counter black(*) or white(o) any number of squares to the left, as long as no other counter is in the way and the destination square is empty, or...\n" +
             "  - Remove the counter on square 1 (only if a counter is there)\n" +
             "\n" +
             "Win Condition\n" +
