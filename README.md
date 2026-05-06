@@ -13,8 +13,6 @@ The project is written in the [Kotlin](https://kotlinlang.org) programming langu
 - Using non-trivial string manipulation
 - Using additional non-core libraries
 
-** EDIT LIST ABOVE TO MATCH YOUR PROJECT**
-
 ---
 
 ## Project Files
@@ -45,6 +43,4 @@ The game rules...
 ### Win Condition
 - The player who removes the black counter from square 1 wins
 
-### Variant
-- Counters can slide either left or right (but still can't jump other counters)
 
