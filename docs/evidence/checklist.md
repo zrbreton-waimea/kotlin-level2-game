@@ -41,15 +41,15 @@ The program code:
 ### Program Testing
 
 The program has been tested and there is documented evidence that:
-- [ ] The game is **fully functional**, showing testing of:
-  - [ ] game setup
-  - [ ] player moves
-  - [ ] players taking turns
-  - [ ] scoring (if any)
-  - [ ] players winning
+- [x] The game is **fully functional**, showing testing of:
+  - [x] game setup
+  - [x] player moves
+  - [x] players taking turns
+  - [x] scoring (if any)
+  - [x] players winning
   - [ ] final feedback (if appropriate)
-- [ ] **Valid (expected) data** has been used to test **all data inputs**
-- [ ] Where tests have failed, **fixes** are discussed and **tests re-run**
+- [x] **Valid (expected) data** has been used to test **all data inputs**
+- [x] Where tests have failed, **fixes** are discussed and **tests re-run**
 
 ---
 
@@ -92,26 +92,26 @@ The program has been tested using:
 ### Program Code
 
 Program flexibility and maintainability is aided by:
-- [ ] **Constants** being used to define key values, and used throughout the program
-- [ ] Variable values being **derived at run-time** (from other variables / constants)
-- [ ] Literal values only being used if they **make sense**, and they don't impact program flexibility
+- [x] **Constants** being used to define key values, and used throughout the program
+- [x] Variable values being **derived at run-time** (from other variables / constants)
+- [x] Literal values only being used if they **make sense**, and they don't impact program flexibility
 
 Program flexibility and maintainability is aided by good program structure:
-- [ ] Conditions, branching, loops and functions are used **effectively**
-- [ ] Procedures are **efficient** (minimal iterations, etc.)
-- [ ] **Minimal duplication of code** (instead using loops, or having multiple calls to a single function)
-- [ ] Functions are **well-chosen and logical**, with a clearly defined purpose
-- [ ] The functions chosen represent a **logical decomposition** of the task
+- [x] Conditions, branching, loops and functions are used **effectively**
+- [x] Procedures are **efficient** (minimal iterations, etc.)
+- [x] **Minimal duplication of code** (instead using loops, or having multiple calls to a single function)
+- [x] Functions are **well-chosen and logical**, with a clearly defined purpose
+- [x] The functions chosen represent a **logical decomposition** of the task
 
 ### Program Documentation
 
 The program code:
-- [ ] Code is laid-out and organised **logically and concisely**
+- [x] Code is laid-out and organised **logically and concisely**
 
 ### Program Testing
 
 The program has been tested to be **robust**:
-- [ ] With a **comprehensive and thorough** test plan
-- [ ] Testing **regularly** throughput development, allowing **time for debugging**
-- [ ] Using test values that cover **invalid** (unexpected) cases
-- [ ] Resulting in a program that **copes appropriately** with invalid inputs
+- [x] With a **comprehensive and thorough** test plan
+- [x] Testing **regularly** throughput development, allowing **time for debugging**
+- [x] Using test values that cover **invalid** (unexpected) cases
+- [x] Resulting in a program that **copes appropriately** with invalid inputs

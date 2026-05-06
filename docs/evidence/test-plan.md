@@ -31,6 +31,7 @@ I will enter incorrect inputs to ensure that they are rejected, the user will be
 ### Test Data To Use
 
 Entering random characters. 
+Entering nothing.
 
 ### Expected Test Result
 
@@ -45,6 +46,36 @@ I will enter a username that follow the parameters set in the code.
 ### Test Data To Use
 
 Entering a username within 13 characters and not blank.
+I will do this for player 1 and player 2.
+
+### Expected Test Result
+
+It should accept the username entered showing no errors to the user.
+
+---
+
+## Username input - Boundary
+
+I will enter a username that is on the 13-character limit.
+
+### Test Data To Use
+
+Entering a username 13 characters in length.
+I will do this for player 1 and player 2.
+
+### Expected Test Result
+
+It should accept the username entered showing no errors to the user.
+
+---
+
+## Username input - Boundary
+
+I will enter a username that is on the 1 character minimum.
+
+### Test Data To Use
+
+Entering a username 1 character in length.
 I will do this for player 1 and player 2.
 
 ### Expected Test Result
@@ -201,7 +232,7 @@ It should move to the cell without displaying any error messages or removing the
 
 ---
 
-## Gameplay: Player removing a piece - BOUNDARY/VALID
+## Gameplay: Player removing a piece - BOUNDARY
 
 I will move cell 1, removing it from the board.
 
@@ -214,7 +245,7 @@ I will do this for player 1 and player 2.
 
 It should remove cell 1 when it is selected by the user. It should not ask where they want to move it.
 
-## Gameplay: Player removing the winning piece - BOUNDARY/VALID
+## Gameplay: Player removing the winning piece - BOUNDARY
 
 I will move the winning piece black(*) to cell 1, then on the next players turn they can remove it.
 
