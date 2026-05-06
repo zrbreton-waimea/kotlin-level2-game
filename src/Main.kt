@@ -150,11 +150,11 @@ fun boardCellItems(){
 }
 
 fun playersTurn(){
-    if (currentPlayerIndex == 0){
-        currentPlayerIndex = 1
+    currentPlayerIndex = if (currentPlayerIndex == 0){
+        1
     }
     else{
-        currentPlayerIndex = 0
+        0
     }
 }
 
@@ -176,6 +176,7 @@ fun gameMain() {
         var playerPieceSelect: Int?
         while (!playerHasWon) {
             var invalidJump = false
+            var invalidRightMove = false
 
             println("${players[currentPlayerIndex]}, please select a piece from the board to move. ")
             playerPieceSelect = readlnOrNull()?.trim()?.toIntOrNull()
@@ -193,13 +194,14 @@ fun gameMain() {
             }
 
             // Not removing any pieces, checking for a move.
-            if (playerPieceSelect != null && playerPieceSelect > 1 && playerPieceSelect <= boardSize) {
+            if (playerPieceSelect != null && playerPieceSelect > 1 && playerPieceSelect <= boardSize && boardCells[playerPieceSelect-1] != '-') {
                 println("Where would you like to move this piece, choose a place on the board.")
                 val playerPieceMove = readlnOrNull()?.trim()?.toIntOrNull()
                 if (playerPieceMove != null && playerPieceMove in 1..<boardSize) {
 
                     //Checking whether player has jumped over a piece, if they have then prompt
                     if (playerPieceMove < playerPieceSelect && boardCells[playerPieceMove-1] != 'o' && boardCells[playerPieceMove-1] != '*') {
+                        //If the player makes no illegal moves, then move the piece they choose to the place on the board they chose.
                         for(i in playerPieceMove..<playerPieceSelect-1){
                             if(!invalidJump && boardCells[i] == 'o' || boardCells[i] == '*') {
                                 println("You cannot jump over other pieces on the board.".red())
@@ -207,14 +209,16 @@ fun gameMain() {
                             }
 
                         }
-                        //If the player makes no illegal moves, then move the piece they choose to the place on the board they chose.
                     }
+
+
                     else if(playerPieceMove >= playerPieceSelect){
                         println("You cannot move to the right, on top of another piece or jump any pieces. You MUST move pieces to the left. ".red())
+                        invalidRightMove = true
                         boxDraw()
                     }
 
-                    if(!invalidJump){
+                    if(!invalidJump && !invalidRightMove){
                         Collections.swap(boardCells, playerPieceSelect - 1 , playerPieceMove - 1)
                         break
                     }
