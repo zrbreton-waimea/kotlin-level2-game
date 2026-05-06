@@ -169,13 +169,13 @@ fun gameMain() {
     boardCells.shuffle()
 
     var playerHasWon = false
-    var invalidJump = false
 
     while(!playerHasWon) {
         boxDraw()
 
         var playerPieceSelect: Int?
         while (!playerHasWon) {
+            var invalidJump = false
 
             println("${players[currentPlayerIndex]}, please select a piece from the board to move. ")
             playerPieceSelect = readlnOrNull()?.trim()?.toIntOrNull()
@@ -208,14 +208,15 @@ fun gameMain() {
 
                         }
                         //If the player makes no illegal moves, then move the piece they choose to the place on the board they chose.
-                        if (!invalidJump){
-                            Collections.swap(boardCells, playerPieceSelect - 1 , playerPieceMove - 1)
-                            break
-                        }
                     }
-                    else{
+                    else if(playerPieceMove >= playerPieceSelect){
                         println("You cannot move to the right, on top of another piece or jump any pieces. You MUST move pieces to the left. ".red())
                         boxDraw()
+                    }
+
+                    if(!invalidJump){
+                        Collections.swap(boardCells, playerPieceSelect - 1 , playerPieceMove - 1)
+                        break
                     }
                 }
                 else {
@@ -229,7 +230,7 @@ fun gameMain() {
 
             if (playerHasWon)
             {
-                println("${players[currentPlayerIndex]} has won! Congrats!")
+                println("${players[currentPlayerIndex]} has won! Congrats! (*^▽^*)")
                 break
             }        // Winning player has been decided so break out of main loop.
 
