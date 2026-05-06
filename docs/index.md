@@ -1,6 +1,6 @@
-# PROJECT NAME HERE
+# Game: Pinned!
 
-by YOUR NAME HERE
+by Zander Breton
 
 ---
 
