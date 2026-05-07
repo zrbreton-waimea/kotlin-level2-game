@@ -174,10 +174,12 @@ fun gameMain() {
     while(!playerHasWon) {
         boxDraw()
 
+        // Input loop - will repeat until valid move
         var playerPieceSelect: Int?
         while (!playerHasWon) {
             var invalidJump = false
             var invalidMoveRight = false
+            var invalidMoveOntop = false
 
             println("${players[currentPlayerIndex]}, please select a piece from the board to move. ")
             playerPieceSelect = readlnOrNull()?.trim()?.toIntOrNull()
@@ -200,6 +202,11 @@ fun gameMain() {
                 val playerPieceMove = readlnOrNull()?.trim()?.toIntOrNull()
                 if (playerPieceMove != null && playerPieceMove in 1..<boardSize) {
 
+                    if(boardCells[playerPieceMove-1] == 'o' || boardCells[playerPieceMove-1] == '*') {
+                        println("You cannot move on top of another piece.".red())
+                        invalidMoveOntop = true
+                    }
+
                     //Checking whether player has jumped over a piece.
                     if (playerPieceMove < playerPieceSelect && boardCells[playerPieceMove-1] != 'o' && boardCells[playerPieceMove-1] != '*') {
                         //If the player makes no illegal moves, then the piece is moved.
@@ -213,12 +220,12 @@ fun gameMain() {
 
 
                     else if(playerPieceMove >= playerPieceSelect){
-                        println("You cannot move to the right, on top of another piece or jump any pieces. You MUST move pieces to the left. ".red())
+                        println("You cannot move to the right. You MUST move pieces to the left. ".red())
                         invalidMoveRight = true
                         boxDraw()
                     }
 
-                    if(!invalidJump && !invalidMoveRight){
+                    if(!invalidJump && !invalidMoveRight && !invalidMoveOntop) {
                         Collections.swap(boardCells, playerPieceSelect - 1 , playerPieceMove - 1)
                         break
                     }

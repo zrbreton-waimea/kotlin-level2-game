@@ -106,23 +106,6 @@ Test passed - The 13 character usernames were accepted.
 
 ## Username input - Boundary
 
-I will enter a username that is on the 13-character limit.
-
-### Test Data To Use
-
-Entering a username 13 characters in length.
-I will do this for player 1 and player 2.
-
-### Test Result
-
-![Username-input-BOUNDARY-13Char.gif](screenshots/Username-input-BOUNDARY-13Char.gif)
-
-Test passed - The 13 character usernames were accepted.
-
----
-
-## Username input - Boundary
-
 I will enter a username that is on the 1 character minimum.
 
 ### Test Data To Use
@@ -172,3 +155,53 @@ Test passed - The usernames over 13 characters were rejected.
 
 ---
 
+## Gameplay: Player Piece Movement - VALID
+
+I will move a piece without breaking any rules.
+
+### Test Data To Use
+
+From a cell that has a piece in it, to the left to a cell that is blank/unoccupied.
+I will do this for player 1 and player 2.
+
+### Test Result
+
+![Gameplay-Player-Piece-Movement-VALID.gif](screenshots/Gameplay-Player-Piece-Movement-VALID.gif)
+
+Test passed - The movement of the piece 3 to 2 on B's turn worked. The movement of player A, 4 to 3 worked as well.
+
+---
+
+## Gameplay: Player Piece Movement - INVALID
+
+I will move a piece to the right.
+
+### Test Data To Use
+
+From a cell that has a piece in it, to the right to a cell.
+I will do this for player 1 and player 2.
+
+### Test Result
+
+![Gameplay-Player-Piece-Movement-INVALID-to-right.gif](screenshots/Gameplay-Player-Piece-Movement-INVALID-to-right.gif)
+
+Test passed - The movement on both player A and B's turn was rejected as they tried moving to the right.
+
+---
+
+## Gameplay: Player Piece Movement - INVALID
+
+I will move a piece into a cell that is occupied by another piece.
+
+### Test Data To Use
+
+From a cell that has a piece in it, to a cell occupied.
+I will do this for player 1 and player 2.
+
+### Test Result
+
+
+
+Test passed - The movement of the piece 3 to 2 on B's turn worked. The movement of player A, 4 to 3 worked as well.
+
+---
