@@ -217,7 +217,7 @@ It won't let you select a cell that is blank, it should respond with an error me
 
 ---
 
-## Gameplay: Player Piece Movement - BOUNDARY/VALID
+## Gameplay: Player Piece Movement - BOUNDARY
 
 I will move a piece from a cell, to cell 1. This will test whether the first cell can hold a piece that the player has moved.
 
@@ -234,7 +234,7 @@ It should move to the cell without displaying any error messages or removing the
 
 ## Gameplay: Player removing a piece - BOUNDARY
 
-I will move cell 1, removing it from the board.
+I will move/select cell 1, removing it from the board.
 
 ### Test Data To Use
 

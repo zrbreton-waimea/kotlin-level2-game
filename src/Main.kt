@@ -107,6 +107,8 @@ fun userNameSelect(){
         }
     }
 }
+
+
 //This function draws the board, this will change with the size of the board.
 fun boxDraw() {
 
@@ -159,6 +161,9 @@ fun playersTurn(){
     }
 }
 
+/**
+ * This is the main entry to the program
+ */
 fun gameMain() {
     //Randomising who starts:
     currentPlayerIndex = (0..1).random()
@@ -171,6 +176,7 @@ fun gameMain() {
 
     var playerHasWon = false
 
+    // Keep going until we get a win
     while(!playerHasWon) {
         boxDraw()
 
@@ -180,6 +186,7 @@ fun gameMain() {
             var invalidJump = false
             var invalidMoveRight = false
             var invalidMoveOntop = false
+
 
             println("${players[currentPlayerIndex]}, please select a piece from the board to move. ")
             playerPieceSelect = readlnOrNull()?.trim()?.toIntOrNull()
@@ -198,13 +205,17 @@ fun gameMain() {
 
             // Checking if the players piece they selected is valid.
             if (playerPieceSelect != null && playerPieceSelect > 1 && playerPieceSelect <= boardSize && boardCells[playerPieceSelect-1] != '-') {
+
+                // It's valid so where to move to
                 println("Where would you like to move this piece, choose a place on the board.")
                 val playerPieceMove = readlnOrNull()?.trim()?.toIntOrNull()
                 if (playerPieceMove != null && playerPieceMove in 1..<boardSize) {
 
+                    // Is there a piece already there
                     if(boardCells[playerPieceMove-1] == 'o' || boardCells[playerPieceMove-1] == '*') {
                         println("You cannot move on top of another piece.".red())
                         invalidMoveOntop = true
+                        boxDraw()
                     }
 
                     //Checking whether player has jumped over a piece.
@@ -218,19 +229,21 @@ fun gameMain() {
                         }
                     }
 
-
+                    //If a player has moved to the right display an error
                     else if(playerPieceMove >= playerPieceSelect){
                         println("You cannot move to the right. You MUST move pieces to the left. ".red())
                         invalidMoveRight = true
                         boxDraw()
                     }
 
+                    //If user has not made any illegal moves then allow the play.
                     if(!invalidJump && !invalidMoveRight && !invalidMoveOntop) {
                         Collections.swap(boardCells, playerPieceSelect - 1 , playerPieceMove - 1)
                         break
                     }
                 }
 
+                //If user has made an error that doesn't have a specific error message this will be displayed.
                 else {
                     println("Select a valid option.\n".red())
                 }
@@ -241,6 +254,7 @@ fun gameMain() {
             }
         }
 
+            //Winner detection
             if (playerHasWon)
             {
                 println("${players[currentPlayerIndex]} has won! Congrats! (*^▽^*)")

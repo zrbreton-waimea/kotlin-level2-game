@@ -200,8 +200,93 @@ I will do this for player 1 and player 2.
 
 ### Test Result
 
+![Gameplay-Player-Piece-Movement-INVALID-OnTopOf.gif](screenshots/Gameplay-Player-Piece-Movement-INVALID-OnTopOf.gif)
 
+Test passed - The movement of a piece to a cell that was occupied was rejected.
 
-Test passed - The movement of the piece 3 to 2 on B's turn worked. The movement of player A, 4 to 3 worked as well.
+---
+
+## Gameplay: Player Piece Movement - INVALID
+
+I will jump over a piece or pieces on the board to a cell.
+
+### Test Data To Use
+
+From a cell that has a piece in it, over other pieces to the left, to a cell.
+I will do this for player 1 and player 2.
+
+### Test Result
+
+![Gameplay-Player-Piece-Movement-INVALID-JumpOver.gif](screenshots/Gameplay-Player-Piece-Movement-INVALID-JumpOver.gif)
+
+Test passed - The movement/jump of piece 4 to 1 on player A's turn and the movement/jump
+
+---
+
+## Gameplay: Player Piece Movement - INVALID
+
+I will move a cell that doesn't have anything in it.
+
+### Test Data To Use
+
+I will move a blank cell that doesn't have anything in it.
+
+### Test Result
+
+![Gameplay-Player-Piece-Movement-INVALID-Blank.gif](screenshots/Gameplay-Player-Piece-Movement-INVALID-Blank.gif)
+
+Test passed - When selecting a blank piece, it rejects the selection.
+
+---
+
+## Gameplay: Player Piece Movement - BOUNDARY
+
+I will move a piece from a cell, to cell 1. This will test whether the first cell can hold a piece that the player has moved.
+
+### Test Data To Use
+
+From a cell that has a piece in it, to cell 1.
+I will do this for player 1 and player 2.
+
+### Test Result
+
+![Gameplay-Player-Piece-Movement-INVALID-MoveTo1.gif](screenshots/Gameplay-Player-Piece-Movement-INVALID-MoveTo1.gif)
+
+Test passed - When moving a piece to cell 1, it did not display any errors.
+
+---
+
+## Gameplay: Player Piece Movement - BOUNDARY
+
+I will move/select cell 1, removing it from the board.
+
+### Test Data To Use
+
+Select cell 1.
+I will do this for player 1 and player 2.
+
+### Test Result
+
+![Gameplay-Player-Piece-Movement-BOUNDARY-PieceRemoveA.gif](screenshots/Gameplay-Player-Piece-Movement-BOUNDARY-PieceRemoveA.gif)
+![Gameplay-Player-Piece-Movement-BOUNDARY-PieceRemoveB.gif](screenshots/Gameplay-Player-Piece-Movement-BOUNDARY-PieceRemoveB.gif)
+
+Test passed - When selecting cell, while occupied, it removes the piece.
+
+---
+
+## Gameplay: Player Piece Movement - BOUNDARY
+
+I will move the winning piece black(*) to cell 1, then on the next players turn they can remove it.
+
+### Test Data To Use
+
+Select cell 1.
+I will do this for player 1 and player 2.
+
+### Test Result
+
+![Gameplay-Player-Piece-Movement-BOUNDARY-RemoveWinPiece .gif](screenshots/Gameplay-Player-Piece-Movement-BOUNDARY-RemoveWinPiece%20.gif)
+
+Test passed - When moving the win piece to cell 1, it shows the win message.
 
 ---
